@@ -26,7 +26,10 @@ var bio = {
     "blog": "selflearnathon.com",
   },
   "biopic": "images/me.jpg",
-  "welcomeMsg": "Welcome"
+  "welcomeMsg": "Welcome",
+  "skills": [
+    "Being Mike", "Not being other people", "Nice enough guy"
+  ]
 };
 
 var work = [
@@ -46,20 +49,37 @@ var work = [
 }
 ];
 
-var education = {
-  "schools": [
-    {
-      "name": "Michigan",
-      "city": "Ann Arbor",
-      "degree": "science"
-  },
+var projects = [
   {
-    "name": "MSU",
-    "city": "East Lansing",
-    "degree": "None"
+    "title": "Web Resume",
+    "dates": "5/8/17 - Present",
+    "description": "Web resume using json, java, and html",
+    "image": "No image"
   }
 ]
+
+var education = {
+  "schools": {
+      "name": "Michigan",
+      "degree": "BA",
+      "dates": "07/05 - 04/09",
+      "location": "Ann Arbor, MI",
+      "major": "Economics"
+  },
+  "online": {
+    "title": "Intro to Programming",
+    "school": "Udacity",
+    "dates": "05/01/17 - Present",
+    "url": "Udacity.com"
+  }
 };
 
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
+
+if (bio.skills.length > 0) {
+  $("#header").append(HTMLskillsStart);
+  for (entry in bio.skills) {
+    $("#skills").append(HTMLskills.replace("%data%",bio.skills[entry]));
+  };
+};
