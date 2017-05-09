@@ -84,12 +84,20 @@ if (bio.skills.length > 0) {
   };
 };
 
-work.forEach(function(job) {
-  $("#workExperience").append(HTMLworkStart);
-  var formattedEmployer = HTMLworkEmployer.replace("%data%",job.employer);
-  var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
-  var formattedDates = HTMLworkDates.replace("%data%", job.dates);
-  var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
-  $(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates
-    + formattedDescription);
+function displayWork() {
+  work.forEach(function(job) {
+    $("#workExperience").append(HTMLworkStart);
+    var formattedEmployer = HTMLworkEmployer.replace("%data%",job.employer);
+    var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
+    var formattedDates = HTMLworkDates.replace("%data%", job.dates);
+    var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
+    $(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates
+      + formattedDescription);
+  });
+};
+
+displayWork();
+
+$(document).click(function(loc) {
+  logClicks(loc.clientX, loc.clientY);
 });
