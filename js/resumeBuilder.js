@@ -19,11 +19,12 @@ var formattedSkills = HTMLskills.replace("%data%", mySkills);
 var bio = {
   "name": "Michael Tikh",
   "role": "Programmer",
-  "contact": {
+  "contacts": {
     "mobile": "248 722 8683",
     "email": "mike.tikh@gmail.com",
     "github": "learnathoner",
     "blog": "selflearnathon.com",
+    "location": "Las Vegas, NV"
   },
   "biopic": "images/me.jpg",
   "welcomeMsg": "Welcome",
@@ -32,40 +33,44 @@ var bio = {
   ]
 };
 
-var work = [
-  {
+var work = {
+  "jobs": [
+    {
     "employer": "Surfing Donkey Hostel",
     "title": "Co-Owner",
     "dates": "02/2015 - 08/2016",
-    "location": "Nicaragua",
+    "location": "San Juan Del Sur, Nicaragua",
     "description": "Owned and operated a hostel in Nicaragua"
-  },
-  {
+    },
+    {
     "employer": "Great Point Capital",
     "title": "Securities Trader",
     "dates": "05/2009 - Present",
     "location": "Austin, TX",
     "description": "Securities trader"
-}
-];
+    }
+  ]
+};
 
 var projects = [
   {
     "title": "Web Resume",
     "dates": "5/8/17 - Present",
     "description": "Web resume using json, java, and html",
-    "image": "No image"
+    "images": ""
   }
 ]
 
 var education = {
-  "schools": {
+  "schools": [
+    {
       "name": "Michigan",
       "degree": "BA",
       "dates": "07/05 - 04/09",
       "location": "Ann Arbor, MI",
       "major": "Economics"
-  },
+  }
+],
   "online": {
     "title": "Intro to Programming",
     "school": "Udacity",
@@ -85,7 +90,7 @@ if (bio.skills.length > 0) {
 };
 
 function displayWork() {
-  work.forEach(function(job) {
+  work.jobs.forEach(function(job) {
     $("#workExperience").append(HTMLworkStart);
     var formattedEmployer = HTMLworkEmployer.replace("%data%",job.employer);
     var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
@@ -112,3 +117,26 @@ function inName(name) {
   intName[1] = lastName.toUpperCase();
   return intName.join(" ");
 };
+
+projects.display = function(){
+  for (proj = 0; proj < projects.length; proj++) {
+    $("#projects").append(HTMLprojectStart);
+    formattedTitle = HTMLprojectTitle.replace("%data%", projects[proj].title);
+    formattedDates = HTMLprojectDates.replace("%data%", projects[proj].dates);
+    formattedDescription = HTMLprojectDescription.replace("%data%", projects[proj].description);
+
+    $(".project-entry:last").append(formattedTitle + formattedDates +
+      formattedDescription);
+
+    if (projects[proj].images.length > 0) {
+      for (image in projects[proj].images) {
+        formattedImage = HTMLprojectImage.replace("%data%", projects[proj].images);
+        $(".project-entry:last").append(formattedImage);
+      };
+    };
+  };
+};
+
+projects.display();
+
+$("#mapDiv").append(googleMap);
