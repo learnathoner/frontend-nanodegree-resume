@@ -101,3 +101,14 @@ displayWork();
 $(document).click(function(loc) {
   logClicks(loc.clientX, loc.clientY);
 });
+
+$("#main").append(internationalizeButton);
+
+function inName(name) {
+  intName = name.split(" ");
+  firstName = intName[0];
+  intName[0] = firstName.slice(0,1).toUpperCase() + firstName.slice(1).toLowerCase();
+  lastName = intName[1];
+  intName[1] = lastName.toUpperCase();
+  return intName.join(" ");
+};
