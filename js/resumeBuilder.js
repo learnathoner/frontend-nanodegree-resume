@@ -4,11 +4,6 @@ This is empty on purpose! Your code to build the resume will go here.
 
 
 // console.log(email);
-var myName = "Michael Tikh";
-var myRole = "Programmer";
-
-var formattedName = HTMLheaderName.replace("%data%", myName);
-var formattedRole = HTMLheaderRole.replace("%data%", myRole);
 
 /*var formattedContact = HTMLemail.replace("%data%", myContact);
 var formattedPicURL = HTMLbioPic.replace("%data%", myPicURL);
@@ -23,15 +18,49 @@ var bio = {
     "mobile": "248 722 8683",
     "email": "mike.tikh@gmail.com",
     "github": "learnathoner",
+    "twitter": "",
     "blog": "selflearnathon.com",
     "location": "Las Vegas, NV"
   },
   "biopic": "images/me.jpg",
-  "welcomeMsg": "Welcome",
+  "welcomeMessage": "Welcome",
   "skills": [
     "Being Mike", "Not being other people", "Nice enough guy"
   ]
 };
+
+bio.display = function() {
+  var formattedName = HTMLheaderName.replace("%data%", bio.name);
+  var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+  var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+  var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+  var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+  var formattedGitHub = HTMLgithub.replace("%data%", bio.contacts.github);
+  var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
+  var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+  var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+  var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+
+
+  if (bio.skills.length > 0) {
+    $("#header").prepend(HTMLskillsStart);
+    for (entry in bio.skills) {
+      $("#skills").append(HTMLskills.replace("%data%",bio.skills[entry]));
+    }
+  }
+  $("#header").prepend(formattedWelcomeMsg);
+  $("#header").prepend(formattedBioPic);
+  $("#header").prepend(formattedRole);
+  $("#header").prepend(formattedName);
+
+  $("#topContacts").append(formattedMobile);
+  $("#topContacts").append(formattedEmail);
+  $("#topContacts").append(formattedGitHub);
+  $("#topContacts").append(formattedBlog);
+  $("#topContacts").append(formattedLocation);
+}
+
+bio.display();
 
 var work = {
   "jobs": [
@@ -57,7 +86,7 @@ var projects = [
     "title": "Web Resume",
     "dates": "5/8/17 - Present",
     "description": "Web resume using json, java, and html",
-    "images": ""
+    "images": [""]
   }
 ]
 
@@ -68,26 +97,23 @@ var education = {
       "degree": "BA",
       "dates": "07/05 - 04/09",
       "location": "Ann Arbor, MI",
-      "major": "Economics"
+      "majors": "Economics",
+      "url": "schoolurl"
   }
 ],
-  "online": {
+  "onlineCourses": [
+    {
     "title": "Intro to Programming",
     "school": "Udacity",
     "dates": "05/01/17 - Present",
     "url": "Udacity.com"
   }
+]
 };
 
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
 
-if (bio.skills.length > 0) {
-  $("#header").append(HTMLskillsStart);
-  for (entry in bio.skills) {
-    $("#skills").append(HTMLskills.replace("%data%",bio.skills[entry]));
-  };
-};
+
+
 
 function displayWork() {
   work.jobs.forEach(function(job) {
@@ -102,10 +128,6 @@ function displayWork() {
 };
 
 displayWork();
-
-$(document).click(function(loc) {
-  logClicks(loc.clientX, loc.clientY);
-});
 
 $("#main").append(internationalizeButton);
 
