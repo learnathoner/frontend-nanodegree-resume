@@ -42,14 +42,6 @@ bio.display = function() {
   var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 
 
-  if (bio.skills.length > 0) {
-    $("#header").prepend(HTMLskillsStart);
-    for (entry in bio.skills) {
-      $("#skills").append(HTMLskills.replace("%data%",bio.skills[entry]));
-    }
-  }
-  $("#header").prepend(formattedWelcomeMsg);
-  $("#header").prepend(formattedBioPic);
   $("#header").prepend(formattedRole);
   $("#header").prepend(formattedName);
 
@@ -58,6 +50,16 @@ bio.display = function() {
   $("#topContacts").append(formattedGitHub);
   $("#topContacts").append(formattedBlog);
   $("#topContacts").append(formattedLocation);
+
+  $("#header").append(formattedWelcomeMsg);
+  $("#header").append(formattedBioPic);
+
+  if (bio.skills.length > 0) {
+    $("#header").append(HTMLskillsStart);
+    for (entry in bio.skills) {
+      $("#skills").append(HTMLskills.replace("%data%",bio.skills[entry]));
+    }
+  }
 }
 
 bio.display();
