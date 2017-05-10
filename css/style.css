@@ -171,6 +171,11 @@ span {
   padding: 5px;
 }
 
+.projectpic {
+  height: 100px;
+  width: 100px;
+}
+
 #lets-connect {
   text-align: center;
 }

@@ -1,21 +1,15 @@
 /*
-This is empty on purpose! Your code to build the resume will go here.
- */
-
-
-// console.log(email);
-
-/*var formattedContact = HTMLemail.replace("%data%", myContact);
-var formattedPicURL = HTMLbioPic.replace("%data%", myPicURL);
-var formattedWelcome_message = HTMLwelcomeMsg.replace("%data%", myWelcome_message);
-var formattedSkills = HTMLskills.replace("%data%", mySkills);
+  Objects Bio, Work, Projects, and Education, with relevant information
+  Display functions for Objects
+  International name button
+  Google Map
 */
 
 var bio = {
   "name": "Michael Tikh",
-  "role": "Programmer",
+  "role": "Programmer-In-Training",
   "contacts": {
-    "mobile": "248 722 8683",
+    "mobile": "555 555 5555",
     "email": "mike.tikh@gmail.com",
     "github": "learnathoner",
     "twitter": "",
@@ -23,9 +17,10 @@ var bio = {
     "location": "Las Vegas, NV"
   },
   "biopic": "images/me.jpg",
-  "welcomeMessage": "Welcome",
+  "welcomeMessage": "Welcome. Please send offers for large salaries here.",
   "skills": [
-    "Being Mike", "Not being other people", "Nice enough guy"
+    "Operating a computer", "Runs sort-of fast", "Can almost touch my toes",
+    "At least 7th grade literacy"
   ]
 };
 
@@ -45,11 +40,18 @@ bio.display = function() {
   $("#header").prepend(formattedRole);
   $("#header").prepend(formattedName);
 
+  //Append contacts to header and footer
   $("#topContacts").append(formattedMobile);
   $("#topContacts").append(formattedEmail);
   $("#topContacts").append(formattedGitHub);
   $("#topContacts").append(formattedBlog);
   $("#topContacts").append(formattedLocation);
+
+  $("#footerContacts").append(formattedMobile);
+  $("#footerContacts").append(formattedEmail);
+  $("#footerContacts").append(formattedGitHub);
+  $("#footerContacts").append(formattedBlog);
+  $("#footerContacts").append(formattedLocation);
 
   $("#header").append(formattedWelcomeMsg);
   $("#header").append(formattedBioPic);
@@ -65,19 +67,21 @@ bio.display = function() {
 var work = {
   "jobs": [
     {
-    "employer": "Surfing Donkey Hostel",
-    "title": "Co-Owner",
-    "dates": "02/2015 - 08/2016",
-    "location": "San Juan Del Sur, Nicaragua",
-    "description": "Owned and operated a hostel in Nicaragua"
-    },
-    {
     "employer": "Great Point Capital",
     "title": "Securities Trader",
     "dates": "05/2009 - Present",
     "location": "Austin, TX",
     "description": "Securities trader"
+    },
+    {
+    "employer": "Surfing Donkey Hostel",
+    "title": "Co-Owner",
+    "dates": "02/2015 - 08/2016",
+    "location": "San Juan Del Sur, Nicaragua",
+    "description": "Owned and operated a 60 person hostel in Nicaragua. " +
+      "Increased Occupancy from 20% to 80% average."
     }
+
   ]
 }
 
@@ -97,9 +101,9 @@ work.display = function() {
 var projects = [
   {
     "title": "Web Resume",
-    "dates": "5/8/17 - Present",
-    "description": "Web resume using json, java, and html",
-    "images": [""]
+    "dates": "5/8/17 - 5/10/17",
+    "description": "Web resume using html, css, and javascript",
+    "images": ["images/web_project.png"]
   }
 ]
 
@@ -137,7 +141,9 @@ var education = {
     "title": "Intro to Programming",
     "school": "Udacity",
     "dates": "05/01/17 - Present",
-    "url": "Udacity.com"
+    //URL looks awful using mix of double and single quotes, but I made the project
+    //using double quotes and it's too late to switch. Noted to use single for future.
+    "url": '<a href = "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000">Udacity.com/IntroToProgramming</a>'
     }
   ]
 }
