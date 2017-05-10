@@ -56,9 +56,9 @@ bio.display = function() {
 
   if (bio.skills.length > 0) {
     $("#header").append(HTMLskillsStart);
-    for (entry in bio.skills) {
-      $("#skills").append(HTMLskills.replace("%data%",bio.skills[entry]));
-    }
+    bio.skills.forEach(function(skill) {
+      $("#skills").append(HTMLskills.replace("%data%",skill));
+    });
   }
 }
 
@@ -103,6 +103,25 @@ var projects = [
   }
 ]
 
+projects.display = function(){
+  for (proj = 0; proj < projects.length; proj++) {
+    $("#projects").append(HTMLprojectStart);
+    formattedTitle = HTMLprojectTitle.replace("%data%", projects[proj].title);
+    formattedDates = HTMLprojectDates.replace("%data%", projects[proj].dates);
+    formattedDescription = HTMLprojectDescription.replace("%data%", projects[proj].description);
+
+    $(".project-entry:last").append(formattedTitle + formattedDates +
+      formattedDescription);
+
+    if (projects[proj].images.length > 0) {
+      projects[proj].images.forEach(function(image) {
+        formattedImage = HTMLprojectImage.replace("%data%", image);
+        $(".project-entry:last").append(formattedImage);
+      });
+    }
+  }
+}
+
 var education = {
   "schools": [
     {
@@ -111,21 +130,51 @@ var education = {
       "dates": "07/05 - 04/09",
       "location": "Ann Arbor, MI",
       "majors": "Economics",
-      "url": "schoolurl"
-  }
-],
+    }
+  ],
   "onlineCourses": [
     {
     "title": "Intro to Programming",
     "school": "Udacity",
     "dates": "05/01/17 - Present",
     "url": "Udacity.com"
+    }
+  ]
+}
+
+education.display = function() {
+  education.schools.forEach(function(school) {
+    $("#education").append(HTMLschoolStart);
+    formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
+    formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
+    formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
+    formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
+    formattedSchoolMajor =   HTMLschoolMajor.replace("%data%", school.majors);
+
+    $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree +
+      formattedSchoolDates + formattedSchoolLocation + formattedSchoolMajor);
+  });
+
+  if (education.onlineCourses.length > 0) {
+    $("#education").append(HTMLonlineClasses);
+    education.onlineCourses.forEach(function(online) {
+      $("#education").append(HTMLschoolStart);
+      formattedOnlineTitle = HTMLonlineTitle.replace("%data%", online.title);
+      formattedOnlineSchool = HTMLonlineSchool.replace("%data%", online.school);
+      formattedOnlineDates = HTMLonlineDates.replace("%data%", online.dates);
+      formattedOnlineURL = HTMLonlineURL.replace("%data%", online.url);
+
+      $(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool +
+        formattedOnlineDates + formattedOnlineURL);
+    })
   }
-]
-};
+}
 
 bio.display();
 work.display();
+projects.display();
+education.display();
+
 
 $("#main").append(internationalizeButton);
 
@@ -138,25 +187,8 @@ function inName(name) {
   return intName.join(" ");
 };
 
-projects.display = function(){
-  for (proj = 0; proj < projects.length; proj++) {
-    $("#projects").append(HTMLprojectStart);
-    formattedTitle = HTMLprojectTitle.replace("%data%", projects[proj].title);
-    formattedDates = HTMLprojectDates.replace("%data%", projects[proj].dates);
-    formattedDescription = HTMLprojectDescription.replace("%data%", projects[proj].description);
 
-    $(".project-entry:last").append(formattedTitle + formattedDates +
-      formattedDescription);
 
-    if (projects[proj].images.length > 0) {
-      for (image in projects[proj].images) {
-        formattedImage = HTMLprojectImage.replace("%data%", projects[proj].images);
-        $(".project-entry:last").append(formattedImage);
-      };
-    };
-  };
-};
 
-projects.display();
 
 $("#mapDiv").append(googleMap);
