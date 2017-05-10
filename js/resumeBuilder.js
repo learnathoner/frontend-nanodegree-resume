@@ -62,8 +62,6 @@ bio.display = function() {
   }
 }
 
-bio.display();
-
 var work = {
   "jobs": [
     {
@@ -81,7 +79,20 @@ var work = {
     "description": "Securities trader"
     }
   ]
-};
+}
+
+work.display = function() {
+  work.jobs.forEach(function(job) {
+    $("#workExperience").append(HTMLworkStart);
+    var formattedEmployer = HTMLworkEmployer.replace("%data%",job.employer);
+    var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
+    var formattedDates = HTMLworkDates.replace("%data%", job.dates);
+    var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
+    var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
+    $(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates
+      + formattedLocation + formattedDescription);
+  });
+}
 
 var projects = [
   {
@@ -113,23 +124,8 @@ var education = {
 ]
 };
 
-
-
-
-
-function displayWork() {
-  work.jobs.forEach(function(job) {
-    $("#workExperience").append(HTMLworkStart);
-    var formattedEmployer = HTMLworkEmployer.replace("%data%",job.employer);
-    var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
-    var formattedDates = HTMLworkDates.replace("%data%", job.dates);
-    var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
-    $(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates
-      + formattedDescription);
-  });
-};
-
-displayWork();
+bio.display();
+work.display();
 
 $("#main").append(internationalizeButton);
 
