@@ -62,7 +62,7 @@ bio.display = function() {
       $("#skills").append(HTMLskills.replace("%data%",skill));
     });
   }
-}
+};
 
 var work = {
   "jobs": [
@@ -83,7 +83,7 @@ var work = {
     }
 
   ]
-}
+};
 
 work.display = function() {
   work.jobs.forEach(function(job) {
@@ -93,10 +93,10 @@ work.display = function() {
     var formattedDates = HTMLworkDates.replace("%data%", job.dates);
     var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
     var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
-    $(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates
-      + formattedLocation + formattedDescription);
+    $(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates +
+      formattedLocation + formattedDescription);
   });
-}
+};
 
 var projects = [
   {
@@ -105,26 +105,28 @@ var projects = [
     "description": "Web resume using html, css, and javascript",
     "images": ["images/web_project.png"]
   }
-]
+];
 
 projects.display = function(){
-  for (proj = 0; proj < projects.length; proj++) {
+  for (project = 0; project < projects.length; project++) {
     $("#projects").append(HTMLprojectStart);
-    formattedTitle = HTMLprojectTitle.replace("%data%", projects[proj].title);
-    formattedDates = HTMLprojectDates.replace("%data%", projects[proj].dates);
-    formattedDescription = HTMLprojectDescription.replace("%data%", projects[proj].description);
+    formattedTitle = HTMLprojectTitle.replace("%data%", projects[project].title);
+    formattedDates = HTMLprojectDates.replace("%data%", projects[project].dates);
+    formattedDescription = HTMLprojectDescription.replace("%data%", projects[project].description);
 
     $(".project-entry:last").append(formattedTitle + formattedDates +
       formattedDescription);
 
-    if (projects[proj].images.length > 0) {
-      projects[proj].images.forEach(function(image) {
+    if (projects[project].images.length > 0) {
+      for (index = 0; index < projects[project].images.length; index ++) {
+        var image = projects[project].images[index];
+        console.log(image);
         formattedImage = HTMLprojectImage.replace("%data%", image);
         $(".project-entry:last").append(formattedImage);
-      });
+      }
     }
   }
-}
+};
 
 var education = {
   "schools": [
@@ -146,7 +148,7 @@ var education = {
     "url": '<a href = "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000">Udacity.com/IntroToProgramming</a>'
     }
   ]
-}
+};
 
 education.display = function() {
   education.schools.forEach(function(school) {
@@ -172,9 +174,9 @@ education.display = function() {
 
       $(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool +
         formattedOnlineDates + formattedOnlineURL);
-    })
+    });
   }
-}
+};
 
 bio.display();
 work.display();
@@ -191,7 +193,7 @@ function inName(name) {
   lastName = intName[1];
   intName[1] = lastName.toUpperCase();
   return intName.join(" ");
-};
+}
 
 
 
