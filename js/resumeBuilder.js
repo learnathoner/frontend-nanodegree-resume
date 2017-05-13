@@ -41,20 +41,10 @@ bio.display = function() {
   $("#header").prepend(formattedName);
 
   //Append contacts to header and footer
-  $("#topContacts").append(formattedMobile);
-  $("#topContacts").append(formattedEmail);
-  $("#topContacts").append(formattedGitHub);
-  $("#topContacts").append(formattedBlog);
-  $("#topContacts").append(formattedLocation);
+  $("#topContacts, #footerContacts").append(formattedMobile, formattedEmail,
+    formattedGitHub, formattedBlog, formattedLocation);
 
-  $("#footerContacts").append(formattedMobile);
-  $("#footerContacts").append(formattedEmail);
-  $("#footerContacts").append(formattedGitHub);
-  $("#footerContacts").append(formattedBlog);
-  $("#footerContacts").append(formattedLocation);
-
-  $("#header").append(formattedWelcomeMsg);
-  $("#header").append(formattedBioPic);
+  $("#header").append(formattedWelcomeMsg, formattedBioPic);
 
   if (bio.skills.length > 0) {
     $("#header").append(HTMLskillsStart);
@@ -131,11 +121,12 @@ projects.display = function(){
 var education = {
   "schools": [
     {
-      "name": "Michigan",
+      "name": "University of Michigan",
       "degree": "BA",
       "dates": "07/05 - 04/09",
       "location": "Ann Arbor, MI",
-      "majors": "Economics",
+      "majors": ["Economics"],
+      "url": "https://www.umich.edu"
     }
   ],
   "onlineCourses": [
@@ -153,14 +144,19 @@ var education = {
 education.display = function() {
   education.schools.forEach(function(school) {
     $("#education").append(HTMLschoolStart);
-    formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
+    formattedSchoolName = HTMLschoolName.replace("%data%", school.name).replace(
+      "#", school.url);
     formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
     formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
     formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
-    formattedSchoolMajor =   HTMLschoolMajor.replace("%data%", school.majors);
 
     $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree +
-      formattedSchoolDates + formattedSchoolLocation + formattedSchoolMajor);
+      formattedSchoolDates + formattedSchoolLocation);
+
+    for (major = 0; major < school.majors.length; major ++) {
+      formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.majors[major]);
+      $(".education-entry:last").append(formattedSchoolMajor);
+    }
   });
 
   if (education.onlineCourses.length > 0) {
